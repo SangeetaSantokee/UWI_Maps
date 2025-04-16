@@ -1,13 +1,122 @@
 {% extends "layout.html" %}
-{% block title %}Flask MVC App{% endblock %}
-{% block page %}Flask MVC App{% endblock %}
+{% block title %}UWI Maps{% endblock %}
 
 {{ super() }}
 
 {% block content %}
-    <h1>Flask MVC</h1>
-    {% if is_authenticated %}
-        <p> Welcome {{current_user.username}} </p>
-    {% endif %}
-    <p>This is a boileplate flask application which follows the MVC pattern for structuring the project.</p>
+
+<h1 style="margin-top: 80px;">Interactive UWI STA Campus Map</h1>
+
+<div id="map" style="height: 500px; margin-bottom: 20px;"></div>
+
+<!-- Filter Controls -->
+<div>
+    <button onclick="recenterMap()">Recenter to UWI</button>
+    <button onclick="toggleMarkers('Building')">Toggle Buildings</button>
+    <button onclick="toggleMarkers('Classroom')">Toggle Classrooms</button>
+    <button onclick="toggleMarkers('Faculty')">Toggle Faculties</button>
+</div>
+
+<!-- Route Controls -->
+<hr>
+<h3>Get Directions</h3>
+<div>
+    <button onclick="enablePointSelection('start')">Select Start Point</button>
+    <button onclick="setCurrentLocation()">Use My Location</button> <!-- ✅ New Button -->
+    <span id="start-coords">Not selected</span><br><br>
+
+    <button onclick="enablePointSelection('end')">Select End Point</button>
+    <span id="end-coords">Not selected</span><br><br>
+
+    <button onclick="calculateRoute()">Show Route</button>
+    <button onclick="clearRoute()">Clear Route</button>
+</div>
+
+<!-- Admin Controls -->
+{% if is_authenticated %}
+<hr>
+<h3>Admin: Add New Marker</h3>
+<form onsubmit="addMarker(event)">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="text" id="lat" placeholder="Latitude" required>
+    <input type="text" id="lng" placeholder="Longitude" required>
+    <input type="text" id="type" placeholder="Type (e.g. Building)" required>
+    <button type="submit">Add Marker</button>
+</form>
+{% endif %}
+
+<!-- Leaflet Map Scripts -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
+
+<script src="{{ url_for('static', filename='routing.js') }}"></script>
+
+<script>
+const map = L.map('map').setView([10.6411, -61.3995], 16); // Center on UWI STA
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+}).addTo(map);
+
+let markers = [];
+
+fetch('/api/markers')
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(m => {
+            const marker = L.marker([m.lat, m.lng])
+                .bindPopup(`<strong>${m.name}</strong><br>Type: ${m.type}`);
+            marker.addTo(map);
+            markers.push({ type: m.type, marker: marker });
+        });
+    });
+
+function toggleMarkers(type) {
+    markers.forEach(obj => {
+        if (obj.type === type) {
+            if (map.hasLayer(obj.marker)) {
+                map.removeLayer(obj.marker);
+            } else {
+                obj.marker.addTo(map);
+            }
+        }
+    });
+}
+
+{% if is_authenticated %}
+function addMarker(e) {
+    e.preventDefault();
+    const token = localStorage.getItem('jwt'); // JWT should be saved after login
+
+    const payload = {
+        name: document.getElementById('name').value,
+        lat: parseFloat(document.getElementById('lat').value),
+        lng: parseFloat(document.getElementById('lng').value),
+        type: document.getElementById('type').value
+    };
+
+    fetch('/api/markers', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Failed to add marker");
+        return res.json();
+    })
+    .then(data => {
+        alert('Marker added!');
+        location.reload(); // Reload to show new marker
+    })
+    .catch(err => alert(err.message));
+}
+{% endif %}
+
+</script>
 {% endblock %}
