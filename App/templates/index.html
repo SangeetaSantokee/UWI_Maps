@@ -1,13 +1,66 @@
 {% extends "layout.html" %}
-{% block title %}Flask MVC App{% endblock %}
-{% block page %}Flask MVC App{% endblock %}
+{% block title %}UWI Maps{% endblock %}
 
 {{ super() }}
 
 {% block content %}
-    <h1>Flask MVC</h1>
-    {% if is_authenticated %}
-        <p> Welcome {{current_user.username}} </p>
-    {% endif %}
-    <p>This is a boileplate flask application which follows the MVC pattern for structuring the project.</p>
+<!-- Map Label CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/maplabel.css') }}">
+
+<!-- Main Header -->
+<h1 style="margin-top: 80px;">Interactive UWI STA Campus Map</h1>
+
+<!-- Search Bar-->>
+<div style="margin-top: 10px; display: flex; gap: 10px; align-items: center; max-width: 400px;">
+    <input id="searchInput" type="text" placeholder="Search for a place..." list="searchSuggestions" oninput="filterSuggestions()" style="flex: 1;" />
+    <button onclick="performSearch()">Search</button>
+    <datalist id="searchSuggestions"></datalist>
+</div>
+
+<!-- Map -->
+<div id="map" style="height: 500px; margin-bottom: 20px;"></div>
+
+<!-- Location and Building/Classroom Filter Controls -->
+<div>
+    <button onclick="recenterMap()">Recenter to UWI</button>
+    <button onclick="setCurrentLocation()">Show My Location</button>
+    <label>
+        <input class="input-field col s6" type="checkbox" id="toggleBuildings" checked />
+        <span>Show Buildings</span>
+    </label>
+    <label>
+        <input class="input-field col s6" type="checkbox" id="toggleClassrooms" checked />
+        <span>Show Classrooms</span>
+    </label>
+</div>
+
+<!-- Faculty Filter Controls -->
+<div>
+    <label for="facultyFilter">Select Faculty:</label>
+    <select id="facultyFilter">
+      <option value="">All Faculties</option>
+      <option value="FOE">Faculty of Engineering</option>
+      <option value="FFA">Faculty of Food & Agriculture</option>
+      <option value="FHE">Faculty of Humanities & Education</option>
+      <option value="FOL">Faculty of Law</option>
+      <option value="FMS">Faculty of Medical Sciences</option>
+      <option value="FST">Faculty of Science and Technology</option>
+      <option value="FSS">Faculty of Social Sciences</option>
+      <option value="FSP">Faculty of Sport</option>
+    </select>
+</div>
+
+<!-- Leaflet Map Scripts -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
+
+<!-- Display Map Script -->>
+<script src="{{ url_for('static', filename='usermap.js') }}"></script>
+
+<!-- Additional Functions Scripts -->
+<script src="{{ url_for('static', filename='locate.js') }}"></script>
+<script src="{{ url_for('static', filename='search.js') }}"></script>
 {% endblock %}

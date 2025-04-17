@@ -12,36 +12,36 @@
 
 
 {% block content %}
-
 <div class="content fill-space">
   <img class="grow-2 page-img" src="#INSERT BACKGROUND IMAGE HERE#">
   <div class="subcontent center-vertical">
-    <h4 class="center">Sign Up</h4>
+    <h4 class="center">Login</h4>
+    <form id="loginForm" method="POST" action="/login" style="padding:1em">
 
-    <form id="signupForm" method="POST" action="/signup" style="padding:1em">
       <div class="row">
         <div class="input-field col s12">
           <input id="username" name="username" type="text" class="validate">
           <label for="username">Username</label>
         </div>
       </div>
-  
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" name="password" type="password" class="validate">
+          <input name="password" id="password" type="password" class="validate">
           <label for="password">Password</label>
         </div>
       </div>
       <div class="row justify-content">
-        <div class="col s8 card-action left-align" style="margin-left:0;">
-          <a href="/">&larr; Back to Login</a>
+        <div class="col s4 card-action">
+          <input type="submit" class="blue text-white btn" value="Login">
         </div>
-        <div class="col s3 card-action right-align">
-          <input type="submit" class="blue text-white btn" value="Sign up">
+
+        <div class="col s8 card-action right-align">
+          <a href="/signup">Don't have an account? Sign Up</a>
         </div>
       </div>
-  
+
     </form>
   </div>
+
 </div>
 {% endblock %}
