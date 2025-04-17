@@ -1,5 +1,7 @@
-from flask import Blueprint, render_template, jsonify, request, flash, send_from_directory, flash, redirect, url_for
+from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
 from flask_jwt_extended import jwt_required, current_user, unset_jwt_cookies, set_access_cookies
+
+from App.controllers.user import get_all_users
 
 
 from.index import index_views
@@ -16,6 +18,18 @@ auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
 '''
 Page/Action Routes
 '''    
+@auth_views.route('/login', methods=['GET'])
+def login_page():
+    page = request.args.get('page', 'login')
+    return render_template('signup.html', page=page)
+
+
+@auth_views.route('/signup', methods=['GET'])
+def signup_page():
+    page = request.args.get('page', 'signup')
+    return render_template('signup.html', page='page')
+
+
 @auth_views.route('/users', methods=['GET'])
 def get_user_page():
     users = get_all_users()
