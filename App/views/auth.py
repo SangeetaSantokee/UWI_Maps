@@ -12,22 +12,22 @@ from App.controllers import (
 
 auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
 
-
-
-
 '''
 Page/Action Routes
 '''    
 @auth_views.route('/login', methods=['GET'])
 def login_page():
-    page = request.args.get('page', 'login')
-    return render_template('signup.html', page=page)
+    return render_template('admin_login.html', page='login', title='Login')
 
 
 @auth_views.route('/signup', methods=['GET'])
 def signup_page():
-    page = request.args.get('page', 'signup')
-    return render_template('signup.html', page='page')
+    return render_template('admin_login.html', page='signup', title='Sign Up')
+
+@auth_views.route('/admin/login', methods=['GET'])
+def admin_login_page():
+    print("Admin login page hit!") 
+    return render_template('admin_login.html', page='admin_login', title='Admin Login')
 
 
 @auth_views.route('/users', methods=['GET'])
