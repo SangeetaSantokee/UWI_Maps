@@ -1,0 +1,16 @@
+.leaflet-tooltip.marker-label::before {
+    display: none !important;
+}
+
+.marker-label {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    font-weight: bold;
+    color: black;
+    font-size: 13px;
+    white-space: nowrap;
+    transform: translateY(-8px);
+    z-index: 1000;
+}

@@ -1,5 +1,134 @@
-{% extends 'admin/master.html' %}
+{% extends "layout.html" %}
+{% block title %}UWI Maps{% endblock %}
 
-{% block body %}
-  <p>Hello world</p>
+{{ super() }}
+
+{% block content %}
+<!-- Map Label CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/maplabel.css') }}">
+
+<!-- Form CSS -->
+<style>
+    /* Colour Circle */
+  .color-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.3s ease;
+  }
+
+  .color-circle.selected {
+    border: 3px solid black;
+  }
+
+  /* Cancel Button */
+  #cancel-action {
+    margin-top: 10px;
+  }
+
+  /* Confirm Delete Popup */
+  .modal {
+    max-width: 400px;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+
+</style>
+
+<!-- Main Header -->
+<h1 style="margin-top: 80px;">Admin View</h1>
+
+<!-- Marker Creation Form -->
+<!-- Name of Marker-->
+<div class="card-panel">
+  <div class="input-field">
+    <input id="marker-name" type="text" class="validate">
+    <label for="marker-name">Marker Name</label>
+  </div>
+
+<!-- Marker Type (Building/Classroom) -->
+<div class="input-field">
+  <select id="marker-type">
+    <option value="" disabled selected>Choose marker type</option>
+    <option value="Building">Building</option>
+    <option value="Classroom">Classroom</option>
+  </select>
+  <label>Marker Type</label>
+</div>
+
+<!-- Marker Faculty -->
+<!-- The value for the faculty here is displayed on the map -->
+<div class="input-field">
+  <select id="marker-faculty">
+    <option value="" disabled selected>Choose faculty</option>
+    <option value="FOE">Faculty of Engineering</option>
+    <option value="FFA">Faculty of Food & Agriculture</option>
+    <option value="FHE">Faculty of Humanities & Education</option>
+    <option value="FOL">Faculty of Law</option>
+    <option value="FMS">Faculty of Medical Sciences</option>
+    <option value="FST">Faculty of Science and Technology</option>
+    <option value="FSS">Faculty of Social Sciences</option>
+    <option value="FSP">Faculty of Sport</option>
+  </select>
+  <label>Faculty</label>
+</div>
+
+<!-- Marker Color Choice -->
+<div style="margin-bottom: 20px;">
+  <label style="display: block; margin-bottom: 10px;">Choose Marker Color:</label>
+  <div id="color-options" style="display: flex; gap: 15px;">
+    <div class="color-circle" data-color="red" style="background-color: red;"></div>
+    <div class="color-circle" data-color="orange" style="background-color: orange;"></div>
+    <div class="color-circle" data-color="yellow" style="background-color: yellow;"></div>
+    <div class="color-circle" data-color="gold" style="background-color: gold;"></div>
+    <div class="color-circle" data-color="blue" style="background-color: blue;"></div>
+    <div class="color-circle" data-color="green" style="background-color: green;"></div>
+    <div class="color-circle" data-color="violet" style="background-color: violet;"></div>
+    <div class="color-circle" data-color="grey" style="background-color: grey;"></div>
+    <div class="color-circle" data-color="black" style="background-color: black;"></div>
+  </div>
+</div>
+
+<!-- Marker Controls -->
+<div>
+  <button class="btn purple" id="submit-marker">Add Marker</button>
+  <button class="btn blue" id="update-marker">Update Marker</button>
+  <button class="btn red" id="delete-marker">Delete Marker</button>
+  <button class="btn green" id="submit-edit" style="display: none;">Submit Changes</button>
+  <button class="btn grey" id="cancel-action" style="display: none;">Cancel</button>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="delete-modal" class="modal">
+  <div class="modal-content">
+    <h5 id="delete-message">Are you sure you want to delete this marker?</h5>
+  </div>
+  <div class="modal-footer">
+    <button id="confirm-delete" class="modal-close btn red">Delete</button>
+    <button class="modal-close btn grey">Cancel</button>
+  </div>
+</div>
+
+<!-- Map -->
+<div id="map" style="height: 500px; margin-top: 20px;"></div>
+
+<!--Location Controls -->
+<button onclick="recenterMap()">Recenter to UWI</button>
+
+<!-- View Users-->
+<a href="/users">
+  <button>View Users</button>
+</a>
+
+<!-- Leaflet Map Scripts -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Map and Controls Scripts -->
+<script src="{{ url_for('static', filename='adminmap.js') }}"></script>
+<script src="{{ url_for('static', filename='admincontrols.js') }}"></script>
+<script src="{{ url_for('static', filename='locate.js') }}"></script>
 {% endblock %}
+

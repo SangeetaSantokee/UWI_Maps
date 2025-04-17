@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, jsonify, request, flash, send_from
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import JWTManager,jwt_required, current_user, unset_jwt_cookies, set_access_cookies, create_access_token
 
-
 from.index import index_views
+from App.models import User
 
 from App.controllers import (
     login,
@@ -34,8 +34,12 @@ def login_action():
         flash('Invalid username or password given'), 401
         response = redirect(url_for('index_views.login_page'))
     else:
+        user = User.query.filter_by(username=data['username']).first()
         flash('Login Successful')
-        response = redirect(url_for('index_views.home_page'))
+        if user and user.isAdmin:
+            response = redirect(url_for('index_views.admin_page'))
+        else:
+            response = redirect(url_for('index_views.home_page'))
         set_access_cookies(response, token) 
     return response
 
@@ -71,6 +75,15 @@ def signup_action():
         response = redirect(url_for('index_views.signup_page'))
     flash('Account created')
     return response
+
+@index_views.route("/admin", methods=['GET'])
+@jwt_required()
+def admin_page():
+    if not current_user.isAdmin:
+        flash("Access denied: Admins only!")
+        return redirect(url_for('index_views.home_page'))
+    return render_template("admin/index.html")
+
 
 '''
 API Routes

@@ -4,10 +4,9 @@ from flask_admin import Admin
 from App.models import db, User
 
 class AdminView(ModelView):
-
     @jwt_required()
     def is_accessible(self):
-        return current_user is not None
+        return current_user and current_user.is_authenticated_admin()
 
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access

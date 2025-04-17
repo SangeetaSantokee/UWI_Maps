@@ -20,6 +20,14 @@ def get_user_page():
 @user_views.route('/users', methods=['POST'])
 def create_user_action():
     data = request.form
+    username = data.get('username')
+    password = data.get('password')
+    is_admin = data.get('isAdmin') == 'true'
+    
+    if not username or not password:
+        flash('Username and password are required.')
+        return redirect(url_for('user_views.get_user_page'))
+    
     flash(f"User {data['username']} created!")
     create_user(data['username'], data['password'])
     return redirect(url_for('user_views.get_user_page'))

@@ -5,4 +5,5 @@ from App.database import db
 def initialize():
     db.drop_all()
     db.create_all()
-    create_user('bob', 'bobpass')
+    create_user('bob', 'bobpass', isAdmin=True)
+    create_user('rob', 'robpass', isAdmin=False)

@@ -14,10 +14,18 @@ def get_markers():
 @jwt_required()
 def add_marker():
     data = request.json
-    marker = Marker(name=data['name'], lat=data['lat'], lng=data['lng'], type=data['type'])
+    marker = Marker(
+        name=data['name'],
+        lat=data['lat'],
+        lng=data['lng'],
+        type=data['type'],
+        faculty=data['faculty'],
+        color=data['color']
+    )
     db.session.add(marker)
     db.session.commit()
     return jsonify(marker.get_json()), 201
+
 
 @marker_views.route('/api/markers/<int:id>', methods=['PUT'])
 @jwt_required()
@@ -30,6 +38,7 @@ def update_marker(id):
     marker.lat = data.get('lat', marker.lat)
     marker.lng = data.get('lng', marker.lng)
     marker.type = data.get('type', marker.type)
+    marker.color = data.get('color', marker.color)
     db.session.commit()
     return jsonify(marker.get_json())
 
