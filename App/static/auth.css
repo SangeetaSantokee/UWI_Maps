@@ -1,4 +1,4 @@
-/* Base Reset */
+/* Reset */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -13,22 +13,30 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: visible;
 }
 
-/* Main Container */
-.container {
-    height: 500px;
+/* =======================
+   Auth Container
+========================== */
+.auth-container {
+    width: 100%;
+    max-width: 900px;
+    min-height: 500px;
     border-radius: 10px;
-    /* box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); */
-    overflow: hidden;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    overflow: visible;
     position: relative;
-    margin: 0;
+    margin: 0 auto;
+    background-color: #fff;
+    display: flex;
 }
 
-/* Form */
+/* =======================
+   Form Styling
+========================== */
 form {
-    background-color: #ffffff;
+    background-color: #fff;
     display: flex;
     flex-direction: column;
     padding: 0 50px;
@@ -71,14 +79,16 @@ button:active {
     transform: scale(0.95);
 }
 
-/* Form Panels */
+/* =======================
+   Panel Logic
+========================== */
 .form-container {
     position: absolute;
     top: 0;
     height: 100%;
-    transition: all 0.6s ease-in-out;
     width: 50%;
     z-index: 1;
+    transition: all 0.6s ease-in-out;
 }
 
 .sign-in-container {
@@ -92,17 +102,21 @@ button:active {
     transform: translateX(100%);
 }
 
-.container.right-panel-active .sign-in-container {
+.auth-container.right-panel-active .sign-in-container {
     transform: translateX(100%);
+    opacity: 0;
+    z-index: 1;
 }
 
-.container.right-panel-active .sign-up-container {
+.auth-container.right-panel-active .sign-up-container {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
 }
 
-/* Overlay Container */
+/* =======================
+   Overlay
+========================== */
 .overlay-container {
     position: absolute;
     top: 0;
@@ -114,11 +128,10 @@ button:active {
     transition: transform 0.6s ease-in-out;
 }
 
-.container.right-panel-active .overlay-container {
+.auth-container.right-panel-active .overlay-container {
     transform: translateX(-100%);
 }
 
-/* Overlay */
 .overlay {
     background: linear-gradient(to right, #ff7e5f, #feb47b);
     background-repeat: no-repeat;
@@ -132,11 +145,13 @@ button:active {
     transition: transform 0.6s ease-in-out;
 }
 
-.container.right-panel-active .overlay {
+.auth-container.right-panel-active .overlay {
     transform: translateX(50%);
 }
 
-/* Overlay Panels */
+/* =======================
+   Overlay Panels
+========================== */
 .overlay-panel {
     position: absolute;
     display: flex;
@@ -161,28 +176,17 @@ button:active {
     transform: translateX(0);
 }
 
-.container.right-panel-active .overlay-left {
+.auth-container.right-panel-active .overlay-left {
     transform: translateX(0);
 }
 
-.container.right-panel-active .overlay-right {
+.auth-container.right-panel-active .overlay-right {
     transform: translateX(0);
 }
 
-/* Media Queries */
-@media only screen and (min-width: 800px) {
-    .container {
-        width: 100%; /* Corrected width */
-    }
-}
-
-@media only screen and (min-width: 601px) {
-    .container {
-        width: 85%;
-    }
-}
-
-/* Headings and Text */
+/* =======================
+   Headings and Text
+========================== */
 h1, h4, h5 {
     font-weight: bold;
     margin: 0;
@@ -197,7 +201,9 @@ p {
     color: #333;
 }
 
-/* Navbar */
+/* =======================
+   Navbar
+========================== */
 .navbar {
     position: absolute;
     top: 0;
@@ -213,7 +219,6 @@ p {
     z-index: 1000;
 }
 
-/* Logo */
 .logo-container {
     top: 5px;
     left: 20px;
@@ -224,4 +229,23 @@ p {
     height: auto;
     border-radius: 10px;
     padding-top: 30px;
+}
+
+/* =======================
+   Responsive Adjustments
+========================== */
+@media only screen and (max-width: 768px) {
+    .auth-container {
+        flex-direction: column;
+        width: 95%;
+    }
+
+    .form-container, .overlay-container {
+        width: 100%;
+        position: relative;
+    }
+
+    .overlay {
+        display: none; /* Hide overlay on small screens */
+    }
 }

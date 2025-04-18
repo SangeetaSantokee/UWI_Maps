@@ -2,6 +2,7 @@
 
 {% block title %}UWI Maps - Sign Up{% endblock %}
 {% block page %}UWI Maps{% endblock %}
+
 {% set auth_page = true %}
 
 {% block navbar %}
@@ -15,7 +16,7 @@
 
 {% block content %}
 
-<div class="container right-panel-active" id="container">
+<div class="auth-container right-panel-active" id="auth-container">
 
   <!-- Sign Up Form -->
   <div class="form-container sign-up-container">
@@ -23,7 +24,7 @@
       <h4 class="center">Create Account</h4>
       <input type="text" name="username" placeholder="Username" class="validate" required />
       <input type="password" name="password" placeholder="Password" class="validate" required />
-      <button type="submit" class="blue text-white btn">Sign Up</button>
+      <button type="submit" class="orange text-white btn">Sign Up</button>
     </form>
   </div>
 
