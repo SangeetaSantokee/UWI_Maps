@@ -21,19 +21,22 @@
   </head>
   <body>
     {% block navbar %}
-    <nav class="purple" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
-    <div class="nav-wrapper container">
-        <h5 class="brand-logo left">UWI Maps</h5>
-        <ul class="right">
-            <li><a href="/index">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/admin">Admin</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </div>
-</nav>
+      <nav class="navbar">
+          <div class="nav-wrapper container">
+              <div class="logo-container">
+                  <img src="{{ url_for('static', filename='maps_logo.png') }}" alt="Logo" class="logo">
+              </div>
+              <ul class="right">
+                  <li><a href="/index">Home</a></li>
+                  <li><a href="/about">About</a></li>
+                  <li><a href="/contact">Contact</a></li>
+                  <li><a href="/admin">Admin</a></li>
+                  <li><a href="/logout">Logout</a></li>
+              </ul>
+          </div>
+      </nav>
     {% endblock %}
+
 
       <style>
 
