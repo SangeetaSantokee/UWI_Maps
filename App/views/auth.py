@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, jsonify, request, flash, send_from
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import JWTManager,jwt_required, current_user, unset_jwt_cookies, set_access_cookies, create_access_token
 
+from App.controllers.user import get_all_users
+
 from.index import index_views
 from App.models import User
 

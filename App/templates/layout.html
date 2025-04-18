@@ -2,7 +2,14 @@
 <html>
   <head>
   
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% if auth_page %}
+      <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+    {% else %}
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% endif %}
+
+    {% block extra_styles %}{% endblock %}
+    
      <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->

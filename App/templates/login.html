@@ -1,47 +1,45 @@
 {% extends "layout.html" %}
 
-{% block title %}UWI Maps{% endblock %}
+{% block title %}UWI Maps - Login{% endblock %}
 {% block page %}UWI Maps{% endblock %}
+
+{% set auth_page = true %}
+
 {% block navbar %}
-<nav class="purple">
-  <div class="nav-wrapper">
-      <a href="#!" class="brand-logo left">UWI Maps</a>
-  </div>
+<nav class="navbar">
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='maps_logo.png') }}" alt="Logo" class="logo">
+    </div>
 </nav>
 {% endblock %}
 
-
 {% block content %}
-<div class="content fill-space">
-  <img class="grow-2 page-img" src="#INSERT BACKGROUND IMAGE HERE#">
-  <div class="subcontent center-vertical">
-    <h4 class="center">Login</h4>
-    <form id="loginForm" method="POST" action="/login" style="padding:1em">
 
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="username" name="username" type="text" class="validate">
-          <label for="username">Username</label>
+  <div class="container" id="container">
+
+    <!-- Sign In Form -->
+    <div class="form-container sign-in-container">
+      <form method="POST" action="/login">
+        <h4 class="center">Login</h4>
+        <input type="text" name="username" placeholder="Username" class="validate" required />
+        <input type="password" name="password" placeholder="Password" class="validate" required />
+        <button type="submit" class="blue text-white btn">Login</button>
+        
+      </form>
+    </div>
+
+    <!-- Optional: Overlay or background -->
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-right">
+          <h5>Welcome to UWI Maps!</h5>
+          <p>New here? Click below to create an account.</p>
+          <a href="/signup"><button class="ghost">Sign Up</button></a>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input name="password" id="password" type="password" class="validate">
-          <label for="password">Password</label>
-        </div>
-      </div>
-      <div class="row justify-content">
-        <div class="col s4 card-action">
-          <input type="submit" class="blue text-white btn" value="Login">
-        </div>
+    </div>
 
-        <div class="col s8 card-action right-align">
-          <a href="/signup">Don't have an account? Sign Up</a>
-        </div>
-      </div>
-
-    </form>
   </div>
 
-</div>
+
 {% endblock %}
