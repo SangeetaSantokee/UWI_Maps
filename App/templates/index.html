@@ -6,22 +6,23 @@
 {% block content %}
 <!-- Map Label CSS -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/maplabel.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 <!-- Main Header -->
-<h1 style="margin-top: 80px;">Interactive UWI STA Campus Map</h1>
+<h1 style="text-align: center; margin-top: 80px;">Interactive UWI STA Campus Map</h1>
 
 <!-- Search Bar-->>
-<div style="margin-top: 10px; display: flex; gap: 10px; align-items: center; max-width: 400px;">
+<div class="search-bar">
     <input id="searchInput" type="text" placeholder="Search for a place..." list="searchSuggestions" oninput="filterSuggestions()" style="flex: 1;" />
     <button onclick="performSearch()">Search</button>
     <datalist id="searchSuggestions"></datalist>
 </div>
 
 <!-- Map -->
-<div id="map" style="height: 500px; margin-bottom: 20px;"></div>
+<div id="map" style="height: 500px; margin-bottom: 20px; margin-top:80px"></div>
 
 <!-- Location and Building/Classroom Filter Controls -->
-<div>
+<div class="map-controls">
     <button onclick="recenterMap()">Recenter to UWI</button>
     <button onclick="setCurrentLocation()">Show My Location</button>
     <label>
@@ -35,7 +36,7 @@
 </div>
 
 <!-- Faculty Filter Controls -->
-<div>
+<div class="faculty-filter">
     <label for="facultyFilter">Select Faculty:</label>
     <select id="facultyFilter">
       <option value="">All Faculties</option>

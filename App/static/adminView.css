@@ -1,0 +1,152 @@
+/* General Body Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  /* Admin Header */
+  .admin-title {
+    margin-top: 80px;
+    text-align: center;
+    color: #2c003e;
+    font-size: 2.8rem;
+    font-weight: 700;
+  }
+  
+  /* Main Container */
+  .admin-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px; /* Adds spacing between cards and map */
+    justify-content: space-between;
+  }
+  
+  /* Form Cards Layout */
+  .form-card {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    width: 300px; /* Ensure cards have a fixed width */
+    margin-bottom: 30px;
+  }
+  
+  /* Flex for form fields in cards */
+  .input-field {
+    margin-bottom: 20px;
+  }
+  
+  /* Marker Color Section */
+  .color-picker {
+    margin: 30px 0 20px;
+  }
+  
+  #color-options {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  
+  .color-circle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .color-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .color-circle.selected {
+    border: 3px solid #2c003e;
+  }
+  
+  /* Control Buttons */
+  .map-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+  }
+  
+  .map-controls .btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 500;
+    text-transform: none;
+    transition: all 0.3s ease;
+  }
+  
+  .map-controls .btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+  }
+  
+  /* Map Styling */
+  #map {
+    height: 500px;
+    border-radius: 15px;
+    margin-top: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border: 2px solid #e1e1e1;
+    flex-grow: 1; /* Allow map to take available space */
+  }
+  
+  /* Cancel Button */
+  #cancel-action {
+    margin-top: 10px;
+  }
+  
+  /* Modal Popup */
+  .modal {
+    max-width: 400px;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    border-radius: 15px;
+  }
+
+  /* Main Container */
+.admin-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  /* Form Cards Layout */
+  .form-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Adds space between the cards */
+    flex-basis: 300px; /* Ensure cards are a consistent width */
+  }
+  
+  .map-section {
+    flex-grow: 1; /* Allow the map to take up remaining space */
+  }
+  
+  /* Map Styling */
+  #map {
+    height: 500px;
+    border-radius: 15px;
+    margin-top: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border: 2px solid #e1e1e1;
+  }
+  

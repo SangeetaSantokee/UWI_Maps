@@ -5,59 +5,197 @@
 {{ super() }}
 
 {% block content %}
-    <div class="row">
-        <p>
-            This is table is renderd on the Server. Flask gets the data from the database and uses jinja templates to dyanmically render this page when a request is sent to <a href="/users">/users</a>.
-        </p>
-    </div>
+<style>
+  /* Global Styles */
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #f7f7f7;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
 
-    <div class="row">
-      <form class="col s12" method="POST" action="/users">
-        
-        <div class="row">
-          <div class="input-field col s4">
-            <input placeholder="Username" name="username" type="text" class="validate">
-            <label for="username">Username</label>
-          </div>
-          <div class="input-field col s4">
-            <input placeholder="password" name="password" type="password" class="validate">
-            <label for="password">Password</label>
-          </div>
-          <div class="input-field col s4">
-            <select name="isAdmin" class="browser-default">
-              <option value="false" selected>False</option>
-              <option value="true">True</option>
-            </select>
-            <label for="isAdmin" class="active">Admin Access</label>
-          </div>
-        </div>
-      
-        <div class="row">
-          <div class="input-field col s12">
-            <button class="btn waves-effect waves-light right purple" type="submit" name="action">Submit</button>
-          </div>
-        </div> 
+  /* Fun Page Heading */
+  .row p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #444;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
 
-      </form>
-    </div>
+  .row p a {
+    color: #9c27b0;
+    text-decoration: none;
+    font-weight: bold;
+  }
 
+  .row p a:hover {
+    text-decoration: underline;
+  }
+
+  /* Form Card Styling */
+  .form-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .form-card:hover {
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+  }
+
+  .input-field input,
+  .input-field select {
+    font-size: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    transition: border-color 0.3s ease;
+  }
+
+  .input-field input:focus,
+  .input-field select:focus {
+    border-color: #9c27b0;
+    box-shadow: 0 0 10px rgba(156, 39, 176, 0.2);
+  }
+
+  .input-field label {
+    color: #777;
+    font-size: 14px;
+  }
+
+  /* Button Styling */
+  .btn {
+    font-size: 16px;
+    padding: 12px 25px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background-color:rgb(185, 147, 12);
+    transform: scale(1.05);
+  }
+
+  .btn.orange {
+    background-color:rgb(185, 147, 12);
+  }
+
+  .btn.orange:hover {
+    background-color:rgb(185, 147, 12);
+  }
+
+  /* Table Styling */
+  table.striped {
+    margin-top: 40px;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table.striped th,
+  table.striped td {
+    padding: 16px 18px;
+    text-align: left;
+    font-size: 16px;
+  }
+
+  table.striped th {
+    background-color:rgb(73, 108, 221);
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  table.striped td {
+    background-color: #fff;
+    color: #555;
+    border-bottom: 2px solid #f4f4f4;
+  }
+
+  /* Hover Effect on Table Rows */
+  table.striped tbody tr:hover {
+    background-color: #f1e1f6;
+    cursor: pointer;
+    transform: scale(1.01);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  /* Responsive Table */
+  @media only screen and (max-width: 768px) {
+    table.striped {
+      font-size: 14px;
+    }
+
+    .input-field input,
+    .input-field select {
+      font-size: 14px;
+      padding: 12px;
+    }
+
+    .btn {
+      font-size: 14px;
+      padding: 10px 20px;
+    }
+  }
+</style>
+
+<div class="row">
+    <p>
+        This table is rendered on the Server. Flask gets the data from the database and uses Jinja templates to dynamically render this page when a request is sent to <a href="/users">/users</a>.
+    </p>
+</div>
+
+<div class="row">
+  <form class="col s12" method="POST" action="/users">
+    
     <div class="row">
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th><th>Username</th><th>Admin Access</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for user in users %}
-            <tr>
-                <td>{{user.id}}</td>
-                <td>{{user.username}}</td>
-                <td>{{user.isAdmin}}</td>
-            </tr>
-          {% endfor %}
-        <tbody>
-      </table>
+      <div class="input-field col s4">
+        <input placeholder="Username" name="username" type="text" class="validate">
+        <label for="username">Username</label>
+      </div>
+      <div class="input-field col s4">
+        <input placeholder="Password" name="password" type="password" class="validate">
+        <label for="password">Password</label>
+      </div>
+      <div class="input-field col s4">
+        <select name="isAdmin" class="browser-default">
+          <option value="false" selected>False</option>
+          <option value="true">True</option>
+        </select>
+        <label for="isAdmin" class="active">Admin Access</label>
+      </div>
     </div>
+  
+    <div class="row">
+      <div class="input-field col s12">
+        <button class="btn waves-effect waves-light right orange" type="submit" name="action">Submit</button>
+      </div>
+    </div> 
+
+  </form>
+</div>
+
+<div class="row">
+  <table class="striped responsive-table">
+    <thead>
+      <tr>
+        <th>Id</th><th>Username</th><th>Admin Access</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+            <td>{{user.id}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.isAdmin}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 {% endblock %}

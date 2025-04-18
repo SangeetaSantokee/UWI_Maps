@@ -4,12 +4,12 @@
 {{ super() }}
 
 {% block content %}
-<!-- Map Label CSS -->
+<!-- Map Label & Admin Styles -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/maplabel.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/adminView.css') }}">
 
-<!-- Form CSS -->
 <style>
-    /* Colour Circle */
+  /* Colour Circle */
   .color-circle {
     width: 30px;
     height: 30px;
@@ -35,69 +35,113 @@
     transform: translateY(-50%) !important;
   }
 
+  /* Main Title */
+  .admin-title {
+    margin-top: 80px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+  }
+
+  /* Admin Form Container */
+  .admin-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Form Card */
+  .form-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+
+  /* Map Display */
+  #map {
+    height: 500px;
+    margin-top: 20px;
+  }
+
+  /* Hidden Buttons */
+  .hidden-btn {
+    display: none;
+  }
 </style>
 
 <!-- Main Header -->
-<h1 style="margin-top: 80px;">Admin View</h1>
+<h1 class="admin-title">Admin View</h1>
 
-<!-- Marker Creation Form -->
-<!-- Name of Marker-->
-<div class="card-panel">
-  <div class="input-field">
-    <input id="marker-name" type="text" class="validate">
-    <label for="marker-name">Marker Name</label>
+<!-- Admin Container -->
+<div class="admin-container">
+  <div class="form-card">
+    <!-- Marker Name -->
+    <div class="input-field">
+      <input id="marker-name" type="text" class="validate">
+      <label for="marker-name">Marker Name</label>
+    </div>
+
+    <!-- Marker Type -->
+    <div class="input-field">
+      <select id="marker-type">
+        <option value="" disabled selected>Choose marker type</option>
+        <option value="Building">Building</option>
+        <option value="Classroom">Classroom</option>
+      </select>
+      <label for="marker-type">Marker Type</label>
+    </div>
+
+    <!-- Marker Faculty -->
+    <div class="input-field">
+      <select id="marker-faculty">
+        <option value="" disabled selected>Choose faculty</option>
+        <option value="FOE">Faculty of Engineering</option>
+        <option value="FFA">Faculty of Food & Agriculture</option>
+        <option value="FHE">Faculty of Humanities & Education</option>
+        <option value="FOL">Faculty of Law</option>
+        <option value="FMS">Faculty of Medical Sciences</option>
+        <option value="FST">Faculty of Science and Technology</option>
+        <option value="FSS">Faculty of Social Sciences</option>
+        <option value="FSP">Faculty of Sport</option>
+      </select>
+      <label for="marker-faculty">Faculty</label>
+    </div>
+
+    <!-- Marker Color Picker -->
+    <div class="color-picker">
+      <label>Choose Marker Color:</label>
+      <div id="color-options" style="display: flex; gap: 10px; margin-top: 10px;">
+        <div class="color-circle" data-color="red" style="background-color: red;"></div>
+        <div class="color-circle" data-color="orange" style="background-color: orange;"></div>
+        <div class="color-circle" data-color="yellow" style="background-color: yellow;"></div>
+        <div class="color-circle" data-color="gold" style="background-color: gold;"></div>
+        <div class="color-circle" data-color="blue" style="background-color: blue;"></div>
+        <div class="color-circle" data-color="green" style="background-color: green;"></div>
+        <div class="color-circle" data-color="violet" style="background-color: violet;"></div>
+        <div class="color-circle" data-color="grey" style="background-color: grey;"></div>
+        <div class="color-circle" data-color="black" style="background-color: black;"></div>
+      </div>
+    </div>
+
+    <!-- Control Buttons -->
+    <div class="map-controls">
+      <button class="btn purple" id="submit-marker">Add Marker</button>
+      <button class="btn blue" id="update-marker">Update Marker</button>
+      <button class="btn red" id="delete-marker">Delete Marker</button>
+      <button class="btn green" id="submit-edit" style="display: none;">Submit Changes</button>
+      <button class="btn grey" id="cancel-action" style="display: none;">Cancel</button>
+    </div>
   </div>
 
-<!-- Marker Type (Building/Classroom) -->
-<div class="input-field">
-  <select id="marker-type">
-    <option value="" disabled selected>Choose marker type</option>
-    <option value="Building">Building</option>
-    <option value="Classroom">Classroom</option>
-  </select>
-  <label>Marker Type</label>
-</div>
+  <!-- Map Display -->
+  <div id="map" style="height: 500px; margin-top: 20px;"></div>
 
-<!-- Marker Faculty -->
-<!-- The value for the faculty here is displayed on the map -->
-<div class="input-field">
-  <select id="marker-faculty">
-    <option value="" disabled selected>Choose faculty</option>
-    <option value="FOE">Faculty of Engineering</option>
-    <option value="FFA">Faculty of Food & Agriculture</option>
-    <option value="FHE">Faculty of Humanities & Education</option>
-    <option value="FOL">Faculty of Law</option>
-    <option value="FMS">Faculty of Medical Sciences</option>
-    <option value="FST">Faculty of Science and Technology</option>
-    <option value="FSS">Faculty of Social Sciences</option>
-    <option value="FSP">Faculty of Sport</option>
-  </select>
-  <label>Faculty</label>
-</div>
-
-<!-- Marker Color Choice -->
-<div style="margin-bottom: 20px;">
-  <label style="display: block; margin-bottom: 10px;">Choose Marker Color:</label>
-  <div id="color-options" style="display: flex; gap: 15px;">
-    <div class="color-circle" data-color="red" style="background-color: red;"></div>
-    <div class="color-circle" data-color="orange" style="background-color: orange;"></div>
-    <div class="color-circle" data-color="yellow" style="background-color: yellow;"></div>
-    <div class="color-circle" data-color="gold" style="background-color: gold;"></div>
-    <div class="color-circle" data-color="blue" style="background-color: blue;"></div>
-    <div class="color-circle" data-color="green" style="background-color: green;"></div>
-    <div class="color-circle" data-color="violet" style="background-color: violet;"></div>
-    <div class="color-circle" data-color="grey" style="background-color: grey;"></div>
-    <div class="color-circle" data-color="black" style="background-color: black;"></div>
+  <!-- Map Utility Controls -->
+  <div class="map-controls">
+    <button class="btn" onclick="recenterMap()">Recenter to UWI</button>
+    <a href="/users"><button class="btn">View Users</button></a>
   </div>
-</div>
-
-<!-- Marker Controls -->
-<div>
-  <button class="btn purple" id="submit-marker">Add Marker</button>
-  <button class="btn blue" id="update-marker">Update Marker</button>
-  <button class="btn red" id="delete-marker">Delete Marker</button>
-  <button class="btn green" id="submit-edit" style="display: none;">Submit Changes</button>
-  <button class="btn grey" id="cancel-action" style="display: none;">Cancel</button>
 </div>
 
 <!-- Delete Confirmation Modal -->
@@ -111,17 +155,6 @@
   </div>
 </div>
 
-<!-- Map -->
-<div id="map" style="height: 500px; margin-top: 20px;"></div>
-
-<!--Location Controls -->
-<button onclick="recenterMap()">Recenter to UWI</button>
-
-<!-- View Users-->
-<a href="/users">
-  <button>View Users</button>
-</a>
-
 <!-- Leaflet Map Scripts -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -131,4 +164,3 @@
 <script src="{{ url_for('static', filename='admincontrols.js') }}"></script>
 <script src="{{ url_for('static', filename='locate.js') }}"></script>
 {% endblock %}
-
