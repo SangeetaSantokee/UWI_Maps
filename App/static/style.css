@@ -17,7 +17,6 @@ body {
     z-index: 1000;
 }
 
-/* Wrapper inside navbar */
 .nav-wrapper.container {
     display: flex;
     justify-content: space-between;
@@ -39,7 +38,7 @@ body {
     border-radius: 8px;
 }
 
-/* Navigation Links */
+/* Nav Links */
 ul.right {
     list-style: none;
     display: flex;
@@ -59,9 +58,9 @@ ul.right li a:hover {
     color: #ff7e5f; 
 }
 
-/* About Section Styling */
-/* About Section Styling */
-.about-section {
+/* About Section */
+.about-section,
+.contact-section {
     max-width: 900px;
     margin: 150px auto;
     padding: 50px 40px;
@@ -73,60 +72,6 @@ ul.right li a:hover {
     animation: fadeIn 0.7s ease;
 }
 
-/* About styles */
-.about-section h1 {
-    font-size: 2.8em;
-    margin-bottom: 20px;
-    color: #6a1b9a;
-    text-align: center;
-}
-
-/* Subheading */
-.about-section h3 {
-    font-size: 1.6em;
-    margin-top: 40px;
-    margin-bottom: 10px;
-    color: #4a0072;
-}
-
-/* Paragraphs */
-.about-section p {
-    font-size: 1.1em;
-    line-height: 1.7;
-    margin-bottom: 20px;
-}
-
-/* List styling */
-.about-section ul {
-    padding-left: 20px;
-    list-style-type: disc;
-}
-
-.about-section ul li {
-    margin-bottom: 10px;
-    font-size: 1.05em;
-}
-
-/* Links */
-.about-section a {
-    text-decoration: none;
-    font-weight: bold;
-    color: #6a1b9a;
-    transition: color 0.3s ease;
-}
-
-.about-section a:hover {
-    color: #4a0072;
-}
-
-/* Animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-
-/* Main Heading */
 .about-section h1 {
     font-size: 36px;
     margin-bottom: 20px;
@@ -134,7 +79,6 @@ ul.right li a:hover {
     text-align: center;
 }
 
-/* Subheadings */
 .about-section h3 {
     font-size: 24px;
     margin-top: 30px;
@@ -142,13 +86,13 @@ ul.right li a:hover {
     color: #6a1b9a;
 }
 
-/* Paragraph text */
-.about-section p {
+.about-section p,
+.contact-section p {
     font-size: 18px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
-/* List style */
 .about-section ul {
     list-style: none;
     padding-left: 0;
@@ -169,25 +113,18 @@ ul.right li a:hover {
     font-weight: bold;
 }
 
-/* Contact Section */
-.contact-section {
-    max-width: 900px;
-    margin: 150px auto;
-    padding: 50px 40px;
-    background: linear-gradient(to right, #ffecd2, #fcb69f);
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    font-family: 'Roboto', sans-serif;
-    color: #333;
-    animation: fadeIn 0.7s ease;
+.about-section a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #6a1b9a;
+    transition: color 0.3s ease;
 }
 
-.contact-section p {
-    font-size: 1.1em;
-    margin-bottom: 30px;
-    text-align: center;
+.about-section a:hover {
+    color: #4a0072;
 }
 
+/* Contact Form */
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -242,43 +179,50 @@ ul.right li a:hover {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Map and Controls Layout */
+.map-and-controls {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    max-width: 95%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+/* Sidebar Panel */
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 280px;
+}
 
 /* Search Bar */
 .search-bar {
     display: flex;
+    flex-direction: column;
     gap: 10px;
-    align-items: center;
-    justify-content: flex-end;
-    max-width: 100%;
-    padding: 10px 30px;
+    align-items: stretch;
+    padding: 20px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 20px auto 0 auto;
-    float: right;
-    clear: both;
-    margin-top: 25px; /* to clear navbar */
-    position: relative;
-    z-index: 10;
 }
 
-/* Search Input Field */
 .search-bar input[type="text"] {
-    flex: 1;
     padding: 10px 15px;
     border: 1px solid #ddd;
-    border-radius: 0px;
     font-size: 16px;
     outline: none;
     transition: border 0.3s ease;
-    min-width: 250px;
 }
 
 .search-bar input[type="text"]:focus {
     border-color: #ff7e5f;
 }
 
-/* Search Button */
 .search-bar button {
     padding: 10px 18px;
     font-size: 16px;
@@ -294,26 +238,21 @@ ul.right li a:hover {
     background: linear-gradient(to right, #feb47b, #ff7e5f);
 }
 
-/* Datalist */
 datalist {
     font-size: 16px;
 }
 
-/*Faculty Styles*/
+/* Faculty Filter */
 .faculty-filter {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    margin: 30px 0;
     padding: 20px;
     border: 2px solid #ffa07a;
     border-radius: 12px;
     background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .faculty-filter label {
@@ -327,7 +266,6 @@ datalist {
     font-size: 1rem;
     border: 2px solid #ffa07a;
     border-radius: 8px;
-    outline: none;
     background-color: #fffaf7;
     transition: all 0.3s ease;
     width: 100%;
@@ -339,31 +277,20 @@ datalist {
     box-shadow: 0 0 8px rgba(255, 126, 95, 0.4);
 }
 
-.content-container {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    margin: 0 auto;
-}
-
-/* Map Container */
+/* Map Controls */
 .map-controls {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 15px;
-    justify-content: center;
-    align-items: center;
     padding: 20px;
     background: linear-gradient(to right, #ffecd2, #fcb69f);
-    margin: 20px auto;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 90%;
 }
 
 .map-controls button {
     padding: 10px 18px;
-    background: linear-gradient(to right, #6a1b9a, #8e24aa);
+    background: orange;
     color: white;
     border: none;
     border-radius: 8px;
@@ -373,7 +300,7 @@ datalist {
 }
 
 .map-controls button:hover {
-    background: linear-gradient(to right, #8e24aa, #6a1b9a);
+    background: darkorange;
 }
 
 .map-controls label {
@@ -384,12 +311,16 @@ datalist {
     gap: 5px;
 }
 
+/* Map Style */
 #map {
+    flex: 1;
+    height: 500px;
     border-radius: 16px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    margin-top: 30px;
+    margin-top: 0;
 }
 
+/* Animation and Transition */
 .search-bar,
 .map-controls,
 .faculty-filter,
@@ -397,7 +328,7 @@ datalist {
     transition: all 0.3s ease-in-out;
 }
 
-/* Responsive Styles */
+/* Responsive Layout */
 @media (max-width: 768px) {
     .navbar {
         height: auto;
@@ -410,13 +341,15 @@ datalist {
         gap: 10px;
     }
 
-    .search-bar {
+    .map-and-controls {
         flex-direction: column;
-        align-items: stretch;
     }
 
-    .map-controls {
-        flex-direction: column;
-        align-items: stretch;
+    .left-panel {
+        width: 100%;
+    }
+
+    #map {
+        width: 100%;
     }
 }

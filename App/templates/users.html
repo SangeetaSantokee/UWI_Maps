@@ -6,196 +6,218 @@
 
 {% block content %}
 <style>
-  /* Global Styles */
   body {
     font-family: 'Roboto', sans-serif;
-    background: #f7f7f7;
+    background: #fff8f5;
     color: #333;
     margin: 0;
     padding: 0;
   }
 
-  /* Fun Page Heading */
-  .row p {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #444;
-    font-weight: 500;
-    margin-bottom: 20px;
+  /* Page Container */
+  .app-users-section {
+    max-width: 1100px;
+    margin: 130px auto;
+    padding: 40px;
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   }
 
-  .row p a {
-    color: #9c27b0;
+  .app-users-section p {
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 500;
+    margin-bottom: 30px;
+    color: #5c3d1f;
+  }
+
+  .app-users-section p a {
+    color: #ff7e5f;
     text-decoration: none;
     font-weight: bold;
   }
 
-  .row p a:hover {
+  .app-users-section p a:hover {
     text-decoration: underline;
   }
 
-  /* Form Card Styling */
+  /* Form Card */
   .form-card {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    background-color: white;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
   }
 
-  .form-card:hover {
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
-    transform: translateY(-5px);
-  }
+  /* For floating label effect */
+.input-field {
+  position: relative;
+  margin-top: 20px;
+}
 
-  .input-field input,
-  .input-field select {
-    font-size: 16px;
-    padding: 14px;
-    border-radius: 8px;
-    border: 2px solid #ddd;
-    transition: border-color 0.3s ease;
-  }
+/* Initial label styling */
+.input-field label {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  font-size: 16px;
+  color: #777;
+  transition: all 0.3s ease;
+  pointer-events: none; /* So the label won't block interactions with the select */
+}
 
-  .input-field input:focus,
-  .input-field select:focus {
-    border-color: #9c27b0;
-    box-shadow: 0 0 10px rgba(156, 39, 176, 0.2);
-  }
+/* Label floats above the select when it is focused or has a value */
+.input-field select:focus + label,
+.input-field select:not(:focus):valid + label {
+  top: -12px;
+  font-size: 14px;
+  color: #ff7e5f;
+}
 
-  .input-field label {
-    color: #777;
-    font-size: 14px;
-  }
+/* Add a little styling to the select element itself */
+.input-field select {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  font-size: 16px;
+  outline: none;
+  width: 100%;
+  transition: all 0.3s ease;
+}
 
-  /* Button Styling */
-  .btn {
-    font-size: 16px;
-    padding: 12px 25px;
-    border-radius: 30px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
-  }
+/* Focus state for select to enhance user experience */
+.input-field select:focus {
+  border-color: #ff7e5f;
+  box-shadow: 0 0 5px rgba(255, 126, 95, 0.4);
+}
 
-  .btn:hover {
-    background-color:rgb(185, 147, 12);
-    transform: scale(1.05);
-  }
 
   .btn.orange {
-    background-color:rgb(185, 147, 12);
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: white;
+    font-weight: bold;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    float: right;
   }
 
   .btn.orange:hover {
-    background-color:rgb(185, 147, 12);
+    background: linear-gradient(to right, #feb47b, #ff7e5f);
+    transform: scale(1.05);
   }
 
   /* Table Styling */
   table.striped {
-    margin-top: 40px;
     width: 100%;
-    border-collapse: collapse;
-  }
-
-  table.striped th,
-  table.striped td {
-    padding: 16px 18px;
-    text-align: left;
-    font-size: 16px;
-  }
-
-  table.striped th {
-    background-color:rgb(73, 108, 221);
-    color: #fff;
-    text-transform: uppercase;
-  }
-
-  table.striped td {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-top: 20px;
     background-color: #fff;
-    color: #555;
-    border-bottom: 2px solid #f4f4f4;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   }
 
-  /* Hover Effect on Table Rows */
+  table.striped thead {
+    background-color: #ff7e5f;
+  }
+
+  table.striped thead th {
+    padding: 16px;
+    color: #fff;
+    font-size: 15px;
+    text-transform: uppercase;
+    text-align: left;
+  }
+
+  table.striped tbody tr {
+    transition: background-color 0.3s ease;
+  }
+
   table.striped tbody tr:hover {
-    background-color: #f1e1f6;
+    background-color: #fff0e6;
     cursor: pointer;
-    transform: scale(1.01);
-    transition: background-color 0.3s ease, transform 0.3s ease;
   }
 
-  /* Responsive Table */
-  @media only screen and (max-width: 768px) {
-    table.striped {
-      font-size: 14px;
+  table.striped td {
+    padding: 16px;
+    font-size: 15px;
+    border-bottom: 1px solid #f7c6a3;
+  }
+
+  @media (max-width: 768px) {
+    .app-users-section {
+      padding: 20px;
     }
 
     .input-field input,
     .input-field select {
       font-size: 14px;
-      padding: 12px;
+      padding: 10px;
     }
 
-    .btn {
-      font-size: 14px;
-      padding: 10px 20px;
+    .btn.orange {
+      float: none;
+      width: 100%;
     }
   }
 </style>
 
-<div class="row">
-    <p>
-        This table is rendered on the Server. Flask gets the data from the database and uses Jinja templates to dynamically render this page when a request is sent to <a href="/users">/users</a>.
-    </p>
-</div>
+<div class="app-users-section">
+  <p>
+    This table is rendered on the server. Flask gets the data from the database and uses Jinja templates to dynamically render this page when a request is sent to
+    <a href="/users">/users</a>.
+  </p>
 
-<div class="row">
-  <form class="col s12" method="POST" action="/users">
-    
-    <div class="row">
-      <div class="input-field col s4">
-        <input placeholder="Username" name="username" type="text" class="validate">
-        <label for="username">Username</label>
+  <div class="form-card">
+    <form method="POST" action="/users">
+      <div class="row">
+        <div class="input-field col s12 m4">
+          <label for="username">Username</label>
+          <input placeholder="Enter username" name="username" type="text" class="validate">
+        </div>
+        <div class="input-field col s12 m4">
+          <label for="password">Password</label>
+          <input placeholder="Enter password" name="password" type="password" class="validate">
+        </div>
+        <div class="input-field col s12 m4">
+          <select name="isAdmin" id="isAdmin">
+            <option value="false" selected>No</option>
+            <option value="true">Yes</option>
+          </select>
+          <label for="isAdmin">Admin Access</label>
+        </div>
       </div>
-      <div class="input-field col s4">
-        <input placeholder="Password" name="password" type="password" class="validate">
-        <label for="password">Password</label>
-      </div>
-      <div class="input-field col s4">
-        <select name="isAdmin" class="browser-default">
-          <option value="false" selected>False</option>
-          <option value="true">True</option>
-        </select>
-        <label for="isAdmin" class="active">Admin Access</label>
-      </div>
-    </div>
-  
-    <div class="row">
-      <div class="input-field col s12">
-        <button class="btn waves-effect waves-light right orange" type="submit" name="action">Submit</button>
-      </div>
-    </div> 
 
-  </form>
-</div>
+      <div class="row">
+        <div class="col s12">
+          <button class="btn orange" type="submit" name="action">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
 
-<div class="row">
   <table class="striped responsive-table">
     <thead>
       <tr>
-        <th>Id</th><th>Username</th><th>Admin Access</th>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Admin Access</th>
       </tr>
     </thead>
     <tbody>
       {% for user in users %}
-        <tr>
-            <td>{{user.id}}</td>
-            <td>{{user.username}}</td>
-            <td>{{user.isAdmin}}</td>
-        </tr>
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ 'Yes' if user.isAdmin else 'No' }}</td>
+      </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
-
 {% endblock %}

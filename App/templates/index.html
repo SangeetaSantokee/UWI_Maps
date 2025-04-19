@@ -11,44 +11,47 @@
 <!-- Main Header -->
 <h1 style="text-align: center; margin-top: 80px;">Interactive UWI STA Campus Map</h1>
 
-<!-- Search Bar-->>
-<div class="search-bar">
-    <input id="searchInput" type="text" placeholder="Search for a place..." list="searchSuggestions" oninput="filterSuggestions()" style="flex: 1;" />
-    <button onclick="performSearch()">Search</button>
-    <datalist id="searchSuggestions"></datalist>
+<!-- Map and Controls Container -->
+<div class="map-and-controls">
+    <div class="left-panel">
+    <!-- Search Bar-->>
+    <div class="search-bar">
+        <input id="searchInput" type="text" placeholder="Search for a place..." list="searchSuggestions" oninput="filterSuggestions()" style="flex: 1;" />
+        <button onclick="performSearch()">Search</button>
+        <datalist id="searchSuggestions"></datalist>
+    </div>
+
+    <div class="map-controls">
+        <button onclick="recenterMap()">Recenter to UWI</button>
+        <button onclick="setCurrentLocation()">Show My Location</button>
+        <label>
+            <input class="input-field col s6" type="checkbox" id="toggleBuildings" checked />
+            <span>Show Buildings</span>
+        </label>
+        <label>
+            <input class="input-field col s6" type="checkbox" id="toggleClassrooms" checked />
+            <span>Show Classrooms</span>
+        </label>
+    </div>
+
+    <!-- Faculty Filter Controls -->
+    <div class="faculty-filter">
+        <label for="facultyFilter">Select Faculty:</label>
+        <select id="facultyFilter">
+        <option value="">All Faculties</option>
+        <option value="FOE">Faculty of Engineering</option>
+        <option value="FFA">Faculty of Food & Agriculture</option>
+        <option value="FHE">Faculty of Humanities & Education</option>
+        <option value="FOL">Faculty of Law</option>
+        <option value="FMS">Faculty of Medical Sciences</option>
+        <option value="FST">Faculty of Science and Technology</option>
+        <option value="FSS">Faculty of Social Sciences</option>
+        <option value="FSP">Faculty of Sport</option>
+        </select>
+    </div>
 </div>
 
-<!-- Map -->
-<div id="map" style="height: 500px; margin-bottom: 20px; margin-top:80px"></div>
-
-<!-- Location and Building/Classroom Filter Controls -->
-<div class="map-controls">
-    <button onclick="recenterMap()">Recenter to UWI</button>
-    <button onclick="setCurrentLocation()">Show My Location</button>
-    <label>
-        <input class="input-field col s6" type="checkbox" id="toggleBuildings" checked />
-        <span>Show Buildings</span>
-    </label>
-    <label>
-        <input class="input-field col s6" type="checkbox" id="toggleClassrooms" checked />
-        <span>Show Classrooms</span>
-    </label>
-</div>
-
-<!-- Faculty Filter Controls -->
-<div class="faculty-filter">
-    <label for="facultyFilter">Select Faculty:</label>
-    <select id="facultyFilter">
-      <option value="">All Faculties</option>
-      <option value="FOE">Faculty of Engineering</option>
-      <option value="FFA">Faculty of Food & Agriculture</option>
-      <option value="FHE">Faculty of Humanities & Education</option>
-      <option value="FOL">Faculty of Law</option>
-      <option value="FMS">Faculty of Medical Sciences</option>
-      <option value="FST">Faculty of Science and Technology</option>
-      <option value="FSS">Faculty of Social Sciences</option>
-      <option value="FSP">Faculty of Sport</option>
-    </select>
+    <div id="map" style="height: 500px; margin-bottom: 20px; margin-top:0px; width: 70%;"></div>
 </div>
 
 <!-- Leaflet Map Scripts -->
