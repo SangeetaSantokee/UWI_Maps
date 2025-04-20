@@ -7,16 +7,20 @@
 <!-- Map Label CSS -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/maplabel.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
-<!-- Main Header -->
-<h1 style="text-align: center; margin-top: 80px;">Interactive UWI STA Campus Map</h1>
+<body class="map-body">
+<!-- Main Header 
+<h1 style="text-align: center; margin-top: 100px;">UWI STA Campus Map</h1>
+-->
+<!-- Button to toggle the left panel -->
+<button class="toggle-btn" onclick="toggleLeftPanel()">☰</button>
 
 <!-- Map and Controls Container -->
 <div class="map-and-controls">
+    <div class="left-panel-wrapper">
     <div class="left-panel">
-    <!-- Search Bar-->>
+    <!-- Search Bar-->
     <div class="search-bar">
-        <input id="searchInput" type="text" placeholder="Search for a place..." list="searchSuggestions" oninput="filterSuggestions()" style="flex: 1;" />
+        <input id="searchInput" type="text" placeholder="Search For A Place..." list="searchSuggestions" oninput="filterSuggestions()" style="flex: 1; color: #4e342e";/>
         <button onclick="performSearch()">Search</button>
         <datalist id="searchSuggestions"></datalist>
     </div>
@@ -50,9 +54,11 @@
         </select>
     </div>
 </div>
-
-    <div id="map" style="height: 500px; margin-bottom: 20px; margin-top:0px; width: 70%;"></div>
 </div>
+
+    <div id="map" style="height: 900px; margin-bottom: 20px; margin-top:0px;"></div>
+</div>
+</body>
 
 <!-- Leaflet Map Scripts -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
@@ -61,7 +67,36 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
 <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
 
-<!-- Display Map Script -->>
+<script> 
+    document.addEventListener('DOMContentLoaded', () => {
+        const wrapper = document.querySelector('.left-panel-wrapper');
+        const toggleBtn = document.querySelector('.toggle-btn');
+
+        toggleBtn.addEventListener('click', () => {
+            wrapper.classList.toggle('expanded');
+        });
+
+        // Collapse panel on outside click (optional enhancement)
+        document.addEventListener('click', (event) => {
+            if (
+                wrapper.classList.contains('expanded') &&
+                !wrapper.contains(event.target) &&
+                !toggleBtn.contains(event.target)
+            ) {
+                wrapper.classList.remove('expanded');
+            }
+        });
+    });
+
+    document.getElementById('toggleBtn').addEventListener('click', function () {
+        // existing toggle logic for forms
+        container.classList.toggle("sign-up-mode");
+    
+        // shrink the button
+        this.classList.toggle("shrinked");
+    });
+</script>
+<!-- Display Map Script -->
 <script src="{{ url_for('static', filename='usermap.js') }}"></script>
 
 <!-- Additional Functions Scripts -->

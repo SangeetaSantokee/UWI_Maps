@@ -3,6 +3,71 @@
 {% block title %}UWI Maps{% endblock %}
 {% block page %}UWI Maps{% endblock %}
 
+{% block extra_styles %}
+<style>
+    .container {
+        justify-content: center;
+        align-items: center;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .contact-section {
+        max-width: 900px;
+        margin-left: 20% !important;
+        padding: 50px 40px;
+        background: #FFE0CC !important;
+        border-radius: 16px !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        font-family: 'Roboto', sans-serif;
+        color: var(--text-dark);
+        animation: fadeIn 0.7s ease;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .contact-section {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+    }
+    .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar">
+        <div class="nav-wrapper container">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='maps_logo.png') }}" alt="Logo" class="logo">
+            </div>
+            <ul class="right">
+                <li><a href="/index">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/admin">Admin</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
 {% block content %}
 
 <div class="contact-section">
@@ -25,7 +90,7 @@
             <textarea id="message" name="message" rows="5" required placeholder="Your Message"></textarea>
         </div>
 
-        <button type="submit" class="btn">Send Message</button>
+        <a href="/index" class="btn orange">Send Message</a>
     </form>
 </div>
 {% endblock %}

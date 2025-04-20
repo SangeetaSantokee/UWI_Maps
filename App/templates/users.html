@@ -4,7 +4,7 @@
 
 {{ super() }}
 
-{% block content %}
+{% block extra_styles %}
 <style>
   body {
     font-family: 'Roboto', sans-serif;
@@ -17,7 +17,7 @@
   /* Page Container */
   .app-users-section {
     max-width: 1100px;
-    margin: 130px auto;
+    margin-left:20% !important;
     padding: 40px;
     background: linear-gradient(to right, #ffecd2, #fcb69f);
     border-radius: 20px;
@@ -98,11 +98,14 @@
     background: linear-gradient(to right, #ff7e5f, #feb47b);
     color: white;
     font-weight: bold;
-    padding: 12px 25px;
+    padding: 12px 24px !important;
     border: none;
     border-radius: 30px;
     transition: all 0.3s ease;
     float: right;
+    margin-right:10% !important;
+    margin-bottom: 10px !important;
+    padding-bottom: 12px !important;
   }
 
   .btn.orange:hover {
@@ -166,11 +169,14 @@
     }
   }
 </style>
+{%endblock%}
 
+{% block content %}
 <div class="app-users-section">
+  <h1 style="text-align: center;">App Users</h1>
   <p>
     This table is rendered on the server. Flask gets the data from the database and uses Jinja templates to dynamically render this page when a request is sent to
-    <a href="/users">/users</a>.
+    <a href="/users">Users</a>.
   </p>
 
   <div class="form-card">
@@ -220,4 +226,7 @@
     </tbody>
   </table>
 </div>
+
+<div class="back">
+  <a href="/admin" class="btn orange">Back to Admin</a>
 {% endblock %}

@@ -1,8 +1,37 @@
-body {
-    overflow-x: hidden;
+:root {
+    --primary: #FF6F61;        /* Coral */
+    --secondary: #F0F4F8;      /* Light Blue Gray */
+    --accent: #4A90E2;         /* Sky Blue */
+    --light-bg: #E8F0F2;       /* Soft Mint */
+    --text-dark: #2C3E50;      /* Dark Slate Blue */
+    --text-medium: #87acaf;    /* Grayish Blue */
+    --highlight: #9fe2f9;      /* Light Lemon Yellow */
+    --complementary: #B2B2D1;  /* Soft Lavender */
 }
 
-/* Navbar */
+/* RESET */
+* {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+/* BODY */
+body {
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    margin-top: 72px !important;
+}
+
+/* NAVBAR – UNCHANGED */
 .navbar {
     position: fixed;
     top: 0;
@@ -11,8 +40,6 @@ body {
     height: 70px;
     background-color: rgba(255, 255, 255, 0.85);
     display: flex;
-    align-items: center;
-    justify-content: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
@@ -22,11 +49,9 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 1200px;
     padding: 0 30px;
 }
 
-/* Logo */
 .logo-container {
     display: flex;
     align-items: center;
@@ -38,44 +63,64 @@ body {
     border-radius: 8px;
 }
 
-/* Nav Links */
 ul.right {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 10px;
     margin: 0;
     padding: 0;
 }
 
 ul.right li a {
     text-decoration: none;
-    color: #333;
+    color: var(--text-medium);
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
 ul.right li a:hover {
-    color: #ff7e5f; 
+    color: var(--text-dark);
+    background-color: var(--highlight);
 }
 
-/* About Section */
+/* ABOUT & CONTACT */
 .about-section,
 .contact-section {
     max-width: 900px;
     margin: 150px auto;
     padding: 50px 40px;
-    background: linear-gradient(to right, #ffecd2, #fcb69f);
+    background: #FFE0CC;
     border-radius: 16px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     font-family: 'Roboto', sans-serif;
-    color: #333;
+    color: var(--text-dark);
     animation: fadeIn 0.7s ease;
+    justify-content: center !important;
+    align-items: center !important;
 }
+
+.about-section {
+    max-width: 900px;
+    margin: 150px auto; /* Centers the section horizontally */
+    padding: 50px 40px;
+    background: #FFE0CC;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-dark);
+    animation: fadeIn 0.7s ease;
+    display: flex; /* Make the section a flex container */
+    flex-direction: column; /* Stack the content vertically */
+    justify-content: center; /* Vertically center the content */
+    align-items: center; /* Horizontally center the content */
+    text-align: center; /* Ensure text is centered */
+}
+
 
 .about-section h1 {
     font-size: 36px;
     margin-bottom: 20px;
-    color: #2e2e2e;
+    color: var(--text-dark);
     text-align: center;
 }
 
@@ -83,7 +128,7 @@ ul.right li a:hover {
     font-size: 24px;
     margin-top: 30px;
     margin-bottom: 15px;
-    color: #6a1b9a;
+    color: var(--text-medium);
 }
 
 .about-section p,
@@ -109,22 +154,22 @@ ul.right li a:hover {
     content: "✔";
     position: absolute;
     left: 0;
-    color: #ff7e5f;
+    color: var(--primary);
     font-weight: bold;
 }
 
 .about-section a {
     text-decoration: none;
     font-weight: bold;
-    color: #6a1b9a;
+    color: var(--text-medium);
     transition: color 0.3s ease;
 }
 
 .about-section a:hover {
-    color: #4a0072;
+    color: var(--text-dark);
 }
 
-/* Contact Form */
+/* CONTACT FORM */
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -139,7 +184,7 @@ ul.right li a:hover {
 .form-group label {
     margin-bottom: 8px;
     font-weight: bold;
-    color: #4a0072;
+    color: var(--text-medium);
 }
 
 .form-group input,
@@ -151,27 +196,33 @@ ul.right li a:hover {
     font-size: 1em;
     outline: none;
     transition: box-shadow 0.3s ease;
+    background-color: #edf2e4;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-    box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+    box-shadow: 0 0 0 3px rgba(255, 112, 67, 0.3); /* soft orange glow */
 }
 
-.btn {
-    align-self: center;
-    background-color: #6a1b9a;
-    color: white;
+/* BUTTONS */
+.btn,
+.search-bar button,
+.map-controls button {
+    background-color: var(--primary);
+    color: rgb(0, 0, 0);
     padding: 12px 25px;
     font-size: 1em;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform */
 }
 
-.btn:hover {
-    background-color: #4a0072;
+.btn:hover,
+.search-bar button:hover,
+.map-controls button:hover {
+    background-color: var(--accent); /* Change to accent color on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
 @keyframes fadeIn {
@@ -179,148 +230,194 @@ ul.right li a:hover {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Map and Controls Layout */
+/* MAP & CONTROLS */
 .map-and-controls {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     gap: 20px;
-    padding: 20px;
-    max-width: 95%;
-    margin: 0 auto;
+    margin: 0px;
+    padding: 0px;
     flex-wrap: wrap;
+    max-width: 100%;
+    width: 100%;
 }
 
-/* Sidebar Panel */
+/* Default state of the left panel (collapsed) */
+.left-panel-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 0;
+    transition: width 0.4s ease;
+    max-width: 250px;
+    flex-shrink: 0;
+}
+
+/* When expanded */
+.left-panel-wrapper.expanded {
+    width: 250px;
+}
+
 .left-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 280px;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease, opacity 0.3s ease;
+    opacity: 0;
+    margin-top: 60px;
 }
 
-/* Search Bar */
+.left-panel-wrapper.expanded .left-panel {
+    transform: translateX(0);
+    opacity: 1;
+    margin-top: 60px;
+}
+
+/* Toggle button styling */
+.toggle-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1.5em;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: absolute; /* Position it absolutely */
+    top: 80px; /* Adjust this value to move it lower */
+    left: 20px; /* Adjust this value to position it horizontally */
+    z-index: 1001; /* Ensure it is above other elements */
+}
+
+.toggle-btn.shrinked {
+    transform: scale(0.85);
+    transition: transform 0.3s ease;
+}
+
+.toggle-btn:hover {
+    background-color: var(--accent); /* Change to accent color on hover */
+}
+
+.toggle-btn:active {
+    transform: scale(0.85);
+}
+
+/* SEARCH BAR */
 .search-bar {
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: stretch;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
+    background-color: white;
+    border-radius: 0px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: var(--text-dark);
 }
 
 .search-bar input[type="text"] {
     padding: 10px 15px;
-    border: 1px solid #ddd;
+    border: 1px solid #c4dab2;
     font-size: 16px;
     outline: none;
     transition: border 0.3s ease;
+    color: var(--text-dark);
+}
+
+#searchInput::placeholder {
+    color: #666;
 }
 
 .search-bar input[type="text"]:focus {
-    border-color: #ff7e5f;
+    border-color: var(--primary);
+    color: var(--text-dark);
 }
 
 .search-bar button {
-    padding: 10px 18px;
-    font-size: 16px;
-    background: linear-gradient(to right, #ff7e5f, #feb47b);
-    color: white;
-    border: none;
     border-radius: 20px;
-    cursor: pointer;
-    transition: background 0.3s ease;
 }
 
-.search-bar button:hover {
-    background: linear-gradient(to right, #feb47b, #ff7e5f);
-}
-
-datalist {
-    font-size: 16px;
-}
-
-/* Faculty Filter */
+/* FACULTY FILTER */
 .faculty-filter {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
     padding: 20px;
-    border: 2px solid #ffa07a;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-radius: 0px;
+    background-color: white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .faculty-filter label {
     font-weight: 600;
     font-size: 1.1rem;
-    color: #333;
+    color: var(--text-dark);
 }
 
 .faculty-filter select {
     padding: 10px 15px;
     font-size: 1rem;
-    border: 2px solid #ffa07a;
-    border-radius: 8px;
-    background-color: #fffaf7;
+    border: 2px solid var(--primary);
+    border-radius: 0px;
+    background-color: var(--light-bg);
     transition: all 0.3s ease;
     width: 100%;
 }
 
 .faculty-filter select:hover,
 .faculty-filter select:focus {
-    border-color: #ff7e5f;
-    box-shadow: 0 0 8px rgba(255, 126, 95, 0.4);
+    border-color: var(--primary);
+    box-shadow: 0 0 8px rgba(255, 112, 67, 0.4); /* soft orange glow */
 }
 
-/* Map Controls */
+/* MAP CONTROLS */
 .map-controls {
     display: flex;
     flex-direction: column;
     gap: 15px;
     padding: 20px;
-    background: linear-gradient(to right, #ffecd2, #fcb69f);
-    border-radius: 16px;
+    background-color: white;
+    border-radius: 0px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .map-controls button {
-    padding: 10px 18px;
-    background: orange;
-    color: white;
-    border: none;
     border-radius: 8px;
-    cursor: pointer;
     font-weight: 500;
-    transition: background 0.3s ease;
-}
-
-.map-controls button:hover {
-    background: darkorange;
 }
 
 .map-controls label {
     font-weight: 600;
-    color: #4a148c;
+    color: var(--text-medium);
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-/* Map Style */
+/* MAP STYLE */
 #map {
     flex: 1;
-    height: 500px;
-    border-radius: 16px;
+    height: 100vh;
+    border-radius: 20px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    margin-top: 0;
+    margin: 0 !important;
+    width: 100%; /* Change this value to your desired width */
+    max-width: 100%; /* Optional: to avoid exceeding the container width */
 }
 
-/* Animation and Transition */
+#map {
+    width: 100%;
+    max-width: calc(100% - 200px); /* Adjust map width when the panel is expanded */
+    transition: max-width 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-in forwards;
+    animation-delay: 0.2s;
+}
+
+.left-panel.expanded ~ #map {
+    max-width: calc(100% - 200px); /* When expanded */
+}
+
+/* TRANSITIONS */
 .search-bar,
 .map-controls,
 .faculty-filter,
@@ -328,7 +425,7 @@ datalist {
     transition: all 0.3s ease-in-out;
 }
 
-/* Responsive Layout */
+/* RESPONSIVE */
 @media (max-width: 768px) {
     .navbar {
         height: auto;
@@ -352,4 +449,11 @@ datalist {
     #map {
         width: 100%;
     }
+}
+
+.container {
+    max-width: 200% !important;
+    width: 100% !important;
+    margin: 0 auto;
+    padding: 0 20px;
 }

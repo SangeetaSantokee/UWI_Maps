@@ -4,7 +4,9 @@
   
     {% if auth_page %}
       <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
-    {% else %}
+    {% elif admin_page %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='adminView.css') }}">
+    {% else  %}
       <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     {% endif %}
 
