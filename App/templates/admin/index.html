@@ -1,9 +1,8 @@
-{% extends "layout.html" %}
-{% block title %}UWI Maps{% endblock %}
-{% set admin_page = true %}
+{% extends "adminLayout.html" %}
+{% block title %}Maps Admin{% endblock %}
 {{ super() }}
 
-{% block content %}
+
 <!-- Stylesheets -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/maplabel.css') }}">
 
@@ -37,7 +36,7 @@
 
   /* NAVBAR */
   .navbar {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -50,7 +49,7 @@
 
 .nav-wrapper.container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     padding: 0 30px;
 }
@@ -69,7 +68,7 @@
   ul.right, .nav-links {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 3px;
     padding: 0;
     margin: 0;
     align-items: center;
@@ -116,7 +115,7 @@
 
   /* SIDEBAR */
   .left-panel {
-    width: 350px;
+    width: 300px;
     background-color: #FFE0CC;
     border-radius: 10px;
     padding: 20px;
@@ -196,10 +195,10 @@
     border-radius: 8px;
     padding: 12px 24px;
     transition: 0.3s;
-    justify-content: center;
-    align-items: center;
+    display: flex; /* Make the button a flex container */
+    justify-content: center; /* Center text horizontally */
+    align-items: center;     /* Center text vertically */
     margin-bottom: 10px;
-    border-radius: 8px; /* Added border-radius for consistency */
   }
 
   .btn:hover,
@@ -207,15 +206,40 @@
     background-color: rgb(255, 211, 108);
   }
 
-  .bottom-map-controls .btn {
-    padding: 12px 24px;
-    font-size: 16px;
-    height: 90px;
-    border-radius: 10px;
-    gap: 40px;
+  .bottom-map-controls {
+    display: flex;
     justify-content: center;
     align-items: center;
-    display: inline-flex;
+    gap: 30px;
+    margin-top: 25px;
+    padding: 10px 20px;
+    background-color: var(--secondary);
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+  }
+  
+  .bottom-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 28px;
+    font-size: 16px;
+    height: 60px;
+    min-width: 180px;
+    border-radius: 10px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .bottom-btn:hover {
+    background-color: #ff9b7e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   .map-controls {
@@ -229,6 +253,57 @@
   .map-controls .btn:hover {
     filter: brightness(1.1);
     transform: translateY(-2px);
+  }
+
+  .admin-map-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    background-color: var(--secondary);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin-map-controls .btn {
+    width: 100%;
+    max-width: 220px;
+    height: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .admin-map-controls .btn:hover {
+    background-color: #ff9b7e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Hidden buttons keep structure but aren't visible */
+  .admin-map-controls .hidden-btn {
+    display: none;
+  }
+  
+  /* Responsive stacking if needed */
+  @media (max-width: 768px) {
+    .admin-map-controls {
+      width: 100%;
+      padding: 16px;
+    }
+  
+    .admin-map-controls .btn {
+      max-width: 100%;
+      font-size: 14px;
+    }
   }
 
   .btn.orange { background-color: #ff7043; }
@@ -253,10 +328,10 @@
   }
 
   #map {
-    height: 500px;
+    height: 700px;
     width: 100%;
     border-radius: 15px;
-    margin-top: 30px;
+    margin-top: 0px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     border: 2px solid #e1e1e1;
   }
@@ -287,10 +362,16 @@
   #marker-name::placeholder {
     color: #201f1f;
   }
+
+  .btn i {
+    margin-right: 8px;
+  }
+  
 </style>
 {% endblock %}
 
 
+{% block content %}
 <!-- Main Content -->
 <div class="admin-container">
   <!-- Left Panel -->
@@ -342,7 +423,7 @@
 
     <!-- Buttons -->
     <div class="admin-map-controls">
-      <button class="btn" id="submit-marker">Add Marker</button> <br>
+      <button class="btn" id="submit-marker"><i class="icon-plus"></i> Add Marker</button>
       <button class="btn" id="update-marker">Update Marker</button>
       <button class="btn" id="delete-marker">Delete Marker</button>
       <button class="btn hidden-btn" id="submit-edit">Submit Changes</button>
@@ -354,8 +435,8 @@
   <div class="map-area">
     <div id="map"></div>
     <div class="bottom-map-controls" style="margin-top: 20px;">
-      <button class="btn" onclick="recenterMap()">Recenter to UWI</button>
-      <a href="/users"><button class="btn">View Users</button></a>
+      <button class="bottom-btn" onclick="recenterMap()">Recenter to UWI</button>
+      <a href="/users"><button class="bottom-btn">View Users</button></a>
     </div>
   </div>
 </div>

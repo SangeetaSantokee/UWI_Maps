@@ -1,14 +1,8 @@
 <!doctype html>
 <html>
   <head>
-  
-    {% if auth_page %}
-      <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
-    {% elif admin_page %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='adminView.css') }}">
-    {% else  %}
-      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/maplabel.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adminView.css') }}">
 
     {% block extra_styles %}{% endblock %}
     
@@ -19,7 +13,7 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{% block title %}{% endblock %}</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='map.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='pin.png') }}">
 
   </head>
   <body>
@@ -27,7 +21,7 @@
       <nav class="navbar">
           <div class="nav-wrapper container">
               <div class="logo-container">
-                  <img src="{{ url_for('static', filename='maps_logo.png') }}" alt="Logo" class="logo">
+                  <img src="{{ url_for('static', filename='admin_logo.png') }}" alt="Logo" class="logo">
               </div>
               <ul class="right">
                   <li><a href="/index">Home</a></li>
